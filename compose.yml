@@ -7,11 +7,11 @@ services:
       - .env
     user: "${LOCAL_UID:-1000}:${LOCAL_GID:-1000}"
     ports:
-      - "8088:8088"
+      - "${LYNX_HOST_PORT:-8088}:8088"
     volumes:
       - ./config/hosts.json:/app/config/hosts.json:ro
       - ./data:/app/data
-      - ${HOME}/.ssh:/home/lynx/.ssh:ro
+      - ${LYNX_SSH_DIR:-${HOME}/.ssh}:/home/lynx/.ssh:ro
     security_opt:
       - no-new-privileges:true
     cap_drop:
