@@ -11,7 +11,7 @@ services:
     volumes:
       - ./config/hosts.json:/app/config/hosts.json:ro
       - ./data:/app/data
-      - ${LYNX_SSH_DIR:-${HOME}/.ssh}:/home/lynx/.ssh:ro
+      - ${LYNX_SSH_DIR}:/home/lynx/.ssh:ro
     security_opt:
       - no-new-privileges:true
     cap_drop:
