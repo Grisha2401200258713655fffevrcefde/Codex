@@ -1,0 +1,21 @@
+services:
+  lynxbrain:
+    build: .
+    container_name: lynxbrain
+    restart: unless-stopped
+    env_file:
+      - .env
+    user: "${LOCAL_UID:-1000}:${LOCAL_GID:-1000}"
+    ports:
+      - "8088:8088"
+    volumes:
+      - ./config/hosts.json:/app/config/hosts.json:ro
+      - ./data:/app/data
+      - ${HOME}/.ssh:/home/lynx/.ssh:ro
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - ALL
+    mem_limit: 512m
+    cpus: 1.0
+    pids_limit: 128
