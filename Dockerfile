@@ -1,7 +1,7 @@
 FROM python:3.12-slim
 
 RUN apt-get update \
-    && apt-get install -y --no-install-recommends openssh-client iputils-ping ca-certificates \
+    && apt-get install -y --no-install-recommends openssh-client iputils-ping ca-certificates procps \
     && rm -rf /var/lib/apt/lists/* \
     && useradd --create-home --uid 10001 lynx
 
