@@ -1,0 +1,50 @@
+{
+  "poll_interval_seconds": 60,
+  "history_window": 1440,
+  "minimum_baseline_samples": 20,
+  "verification_delay_seconds": 20,
+  "auto_remediation": false,
+  "max_automatic_action_level": 1,
+  "ntfy": {
+    "enabled": false,
+    "base_url": "http://ntfy.lan",
+    "topic": "lynxbrain"
+  },
+  "hosts": [
+    {
+      "name": "lynx-control",
+      "address": "127.0.0.1",
+      "mode": "local",
+      "enabled": true,
+      "importance": 8,
+      "ssh_user": "",
+      "ssh_port": 22,
+      "ssh_key": "",
+      "http_checks": [
+        {"name": "LynxBrain", "url": "http://127.0.0.1:8088/health", "timeout": 3}
+      ],
+      "containers": [],
+      "services": [],
+      "allowed_actions": []
+    },
+    {
+      "name": "example-remote",
+      "address": "192.168.1.20",
+      "mode": "ssh",
+      "enabled": false,
+      "importance": 5,
+      "ssh_user": "admin",
+      "ssh_port": 22,
+      "ssh_key": "/home/lynx/.ssh/id_ed25519",
+      "http_checks": [
+        {"name": "Example service", "url": "http://192.168.1.20:8080", "timeout": 5}
+      ],
+      "containers": ["example-app"],
+      "services": ["docker"],
+      "allowed_actions": [
+        "restart_container:example-app",
+        "restart_service:docker"
+      ]
+    }
+  ]
+}
